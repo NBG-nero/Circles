@@ -11,9 +11,5 @@ class SignInViewModel extends AuthViewModel {
 
   // Status get status => _status;
 
-  // String? getUserFirebaseId() {
-  //   return prefs.getString(FirestoreConstants.id);
-  // }
-
   
 }
