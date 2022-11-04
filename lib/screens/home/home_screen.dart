@@ -1,5 +1,4 @@
-
-
+import 'package:circles/utilities/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class Homescreen extends StatefulWidget {
@@ -12,6 +11,10 @@ class Homescreen extends StatefulWidget {
 class _HomescreenState extends State<Homescreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+      ),
+    );
   }
 }

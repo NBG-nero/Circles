@@ -8,4 +8,6 @@ enum Status {
   authenticateCanceled,
 }
 
-class AuthViewModel extends BaseModel {}
+class AuthViewModel extends BaseModel {
+  
+}

@@ -1,8 +1,9 @@
 import 'package:circles/providers/theme_notifier.dart';
 import 'package:circles/utilities/constants/constants.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+
+
 import 'routes/router.gr.dart' as gr;
 
 import 'package:flutter/material.dart';
@@ -13,15 +14,14 @@ import 'utilities/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await ScreenUtil.ensureScreenSize();
-  // await Firebase.initializeApp();
   runApp(Circles());
 }
 
 class Circles extends StatelessWidget {
   Circles({Key? key}) : super(key: key);
-  // final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-  // final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
+
   final appRouter = gr.AppRouter();
   @override
   Widget build(BuildContext context) {
