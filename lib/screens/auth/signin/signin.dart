@@ -15,7 +15,6 @@ class SignIn extends StatefulWidget {
   final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
   SignIn({
     Key? key,
-  
   }) : super(key: key);
 
   @override
@@ -26,17 +25,19 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SignInViewModel>.reactive(
-        viewModelBuilder: () => SignInViewModel(FirebaseAuth.instance,
-            GoogleSignIn(), widget.firebaseFirestore),
+        viewModelBuilder: () => SignInViewModel(
+            FirebaseAuth.instance, GoogleSignIn(), widget.firebaseFirestore),
         onModelReady: (s) {
           s.setInitialised(true);
-       
         },
         builder: (context, model, child) {
           return Scaffold(
             appBar:
                 AppBar(backgroundColor: CrColors.primaryColor.withOpacity(0.8)),
-            body: Column(children: [Text('SignIn')]),
+            body: SingleChildScrollView(
+                child: Column(
+                  children: const  [ 
+                   Text('Sign In')])),
           );
         });
   }
