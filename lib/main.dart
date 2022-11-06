@@ -3,7 +3,6 @@ import 'package:circles/utilities/constants/constants.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 
-
 import 'routes/router.gr.dart' as gr;
 
 import 'package:flutter/material.dart';
@@ -14,7 +13,21 @@ import 'utilities/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+      /// on mobile
+      // name: 'Circles',
+      /// ondesktop 
+      // name: defaultAppName,
+      options: 
+      const FirebaseOptions(
+          apiKey: 'AIzaSyARhejUyeDOUTb2HfRkU9fZa3zNReNT2Rg',
+          appId: '1:110336865612:android:79e37a8e7287313063cbe9',
+          messagingSenderId: '110336865612',
+          projectId: 'circles-ffe44',
+          storageBucket: 'circles-ffe44.appspot.com',
+          )
+          
+          );
   await ScreenUtil.ensureScreenSize();
   runApp(Circles());
 }

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:circles/utilities/constants/constants.dart';
 
@@ -79,7 +79,7 @@ class SignInViewModel extends AuthViewModel {
           await prefs?.setString(
               FirestoreConstants.phoneNumber, currentUser.phoneNumber ?? '');
         } else {
-          DocumentSnapshot documentSnapshot = document[0];
+          // DocumentSnapshot documentSnapshot = document[0];
           // UserChat userChat = UserChat.fromDocument(documentSnapshot);
 
           // await prefs.setString(FirestoreConstants.id, userChat.id);

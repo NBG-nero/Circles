@@ -60,6 +60,7 @@ dependencies:
   path_provider:
   auto_route: 
   flutter_screenutil: ^5.6.0
+  firebase_core_desktop: ^1.0.2
 
 dependency_overrides:  
   firebase_core_platform_interface: 4.5.2

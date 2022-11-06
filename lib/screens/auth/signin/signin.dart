@@ -32,12 +32,10 @@ class _SignInState extends State<SignIn> {
         },
         builder: (context, model, child) {
           return Scaffold(
-            appBar:
-                AppBar(backgroundColor: CrColors.primaryColor.withOpacity(0.8)),
+            appBar: AppBar(backgroundColor: CrColors.primaryColor),
             body: SingleChildScrollView(
-                child: Column(
-                  children: const  [ 
-                   Text('Sign In')])),
+                child:
+                    Column(children: const [Center(child: Text('Sign In'))])),
           );
         });
   }
