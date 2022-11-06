@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CrColors {
-  CrColors._(); 
+  CrColors._();
 
-  static Color primaryColor =const Color.fromARGB(255, 227, 242, 253);
-
- static Map<int, Color> colorMap = {
+  static Color primaryColor = const Color.fromARGB(255, 227, 242, 253);
+  static Color secondaryColor = const Color.fromARGB(255, 144, 202, 249);
+  static Map<int, Color> colorMap = {
     50: const Color.fromARGB(255, 227, 242, 253),
     100: const Color.fromARGB(255, 187, 222, 251),
     200: const Color.fromARGB(255, 144, 202, 249),

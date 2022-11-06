@@ -22,6 +22,12 @@ class AppRouter extends _i2.RootStackRouter {
 
   @override
   final Map<String, _i2.PageFactory> pagesMap = {
+    Splashscreen.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i1.Splashscreen(),
+      );
+    },
     SignIn.name: (routeData) {
       final args =
           routeData.argsAs<SignInArgs>(orElse: () => const SignInArgs());
@@ -41,8 +47,12 @@ class AppRouter extends _i2.RootStackRouter {
   @override
   List<_i2.RouteConfig> get routes => [
         _i2.RouteConfig(
-          SignIn.name,
+          Splashscreen.name,
           path: '/',
+        ),
+        _i2.RouteConfig(
+          SignIn.name,
+          path: '/sign-in',
         ),
         _i2.RouteConfig(
           Homescreen.name,
@@ -52,12 +62,24 @@ class AppRouter extends _i2.RootStackRouter {
 }
 
 /// generated route for
+/// [_i1.Splashscreen]
+class Splashscreen extends _i2.PageRouteInfo<void> {
+  const Splashscreen()
+      : super(
+          Splashscreen.name,
+          path: '/',
+        );
+
+  static const String name = 'Splashscreen';
+}
+
+/// generated route for
 /// [_i1.SignIn]
 class SignIn extends _i2.PageRouteInfo<SignInArgs> {
   SignIn({_i3.Key? key})
       : super(
           SignIn.name,
-          path: '/',
+          path: '/sign-in',
           args: SignInArgs(key: key),
         );
 

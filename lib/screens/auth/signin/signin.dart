@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:stacked/stacked.dart';
 
@@ -26,7 +26,7 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<SignInViewModel>.reactive(
         viewModelBuilder: () => SignInViewModel(
-            FirebaseAuth.instance, GoogleSignIn(), widget.firebaseFirestore),
+            FirebaseAuth.instance, widget.firebaseFirestore),
         onModelReady: (s) {
           s.setInitialised(true);
         },

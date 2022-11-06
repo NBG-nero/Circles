@@ -1,3 +1,5 @@
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -5,42 +7,30 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:circles/utilities/constants/constants.dart';
 
+import '../../../models/models.dart';
 import '../auth_view_model.dart';
 
 class SignInViewModel extends AuthViewModel {
   final FirebaseAuth firebaseAuth;
-  final GoogleSignIn googleSignIn;
 
   final FirebaseFirestore firebaseFirestore;
-  // SharedPreferences? prefs;
-  // bool? isLoggedIn = false;
 
   // ignore: prefer_final_fields
   Status _status = Status.uninitialized;
 
-  SignInViewModel(this.firebaseAuth, this.googleSignIn, this.firebaseFirestore);
+  SignInViewModel(this.firebaseAuth, this.firebaseFirestore);
   // ignore: recursive_getters
   Status get status => _status;
 
-  // initPrefs() async {
-  //   prefs = await SharedPreferences.getInstance();
-  // }
-
-  String? getUserFirebaseId() {
+  Future getUserFirebaseId() async {
+    await intiPrefs();
     return prefs?.getString(FirestoreConstants.id);
   }
 
-  Future<bool> setisLoggedIn() async {
-    bool isLoggedIn = await googleSignIn.isSignedIn();
-    if (isLoggedIn &&
-        (prefs?.getString(FirestoreConstants.id)?.isNotEmpty == true)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+ 
 
   Future<bool> handleSignIn() async {
+    await intiPrefs();
     _status = Status.authenticating;
     notifyListeners();
     GoogleSignInAccount? googleUser = await googleSignIn.signIn();
@@ -79,15 +69,17 @@ class SignInViewModel extends AuthViewModel {
           await prefs?.setString(
               FirestoreConstants.phoneNumber, currentUser.phoneNumber ?? '');
         } else {
-          // DocumentSnapshot documentSnapshot = document[0];
-          // UserChat userChat = UserChat.fromDocument(documentSnapshot);
+          DocumentSnapshot documentSnapshot = document[0];
+          UserChat userChat = UserChat.fromDocument(documentSnapshot);
 
-          // await prefs.setString(FirestoreConstants.id, userChat.id);
-          // await prefs.setString(FirestoreConstants.nickname, userChat.nickname);
-          // await prefs.setString(FirestoreConstants.photoUrl, userChat.photoUrl);
-          // await prefs.setString(FirestoreConstants.aboutMe, userChat.aboutMe);
-          // await prefs.setString(
-          //     FirestoreConstants.phoneNumber, userChat.phoneNumber);
+          await prefs?.setString(FirestoreConstants.id, userChat.id);
+          await prefs?.setString(
+              FirestoreConstants.nickname, userChat.nickname);
+          await prefs?.setString(
+              FirestoreConstants.photoUrl, userChat.photoUrl);
+          await prefs?.setString(FirestoreConstants.aboutMe, userChat.aboutMe);
+          await prefs?.setString(
+              FirestoreConstants.phoneNumber, userChat.phoneNumber);
         }
         _status = Status.authenticated;
         notifyListeners();
@@ -102,5 +94,12 @@ class SignInViewModel extends AuthViewModel {
       notifyListeners();
       return false;
     }
+  }
+
+  Future<void> handleSignOut() async {
+    _status = Status.uninitialized;
+    await firebaseAuth.signOut();
+    await googleSignIn.disconnect();
+    await googleSignIn.signOut();
   }
 }

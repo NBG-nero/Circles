@@ -5,7 +5,9 @@ import '../screens/screens.dart';
 @MaterialAutoRouter(
   replaceInRouteName: 'Page, Route',
   routes: <AutoRoute>[
-    AutoRoute(page: SignIn, initial: true),
+    AutoRoute(page: Splashscreen, initial: true),
+    AutoRoute(page: SignIn),
+
     AutoRoute(page: Homescreen),
   ],
 )
