@@ -15,7 +15,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
       /// on mobile
-      // name: 'Circles',
+      name: 'Circles',
       /// ondesktop 
       // name: defaultAppName,
       options: 

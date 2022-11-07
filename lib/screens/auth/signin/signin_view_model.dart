@@ -1,5 +1,5 @@
 
-
+import 'package:circles/utilities/utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -21,13 +21,6 @@ class SignInViewModel extends AuthViewModel {
   SignInViewModel(this.firebaseAuth, this.firebaseFirestore);
   // ignore: recursive_getters
   Status get status => _status;
-
-  Future getUserFirebaseId() async {
-    await intiPrefs();
-    return prefs?.getString(FirestoreConstants.id);
-  }
-
- 
 
   Future<bool> handleSignIn() async {
     await intiPrefs();
@@ -82,15 +75,20 @@ class SignInViewModel extends AuthViewModel {
               FirestoreConstants.phoneNumber, userChat.phoneNumber);
         }
         _status = Status.authenticated;
+        showToast("Sign in successful");
         notifyListeners();
         return true;
       } else {
         _status = Status.authenticationError;
+        showErrorToast("Sign in failed");
+
         notifyListeners();
         return false;
       }
     } else {
       _status = Status.authenticateCanceled;
+      showErrorToast("Sign in canceled");
+
       notifyListeners();
       return false;
     }

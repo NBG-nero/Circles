@@ -32,40 +32,43 @@ class _SplashscreenState extends State<Splashscreen> {
         },
         builder: (context, model, child) {
           return Scaffold(
-            backgroundColor: CrColors.primaryColor,
+              backgroundColor: CrColors.primaryColor,
               body: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.asset(
-                  'assets/images/splash.png',
-                  width: 300.w,
-                  height: 300.h,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Image.asset(
+                        'assets/images/splash.png',
+                        // width: 300.w,
+                        // height: 300.h,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Text(
+                      "World's largest Private Chat App",
+                      style: Theme.of(context)
+                          .textTheme
+                          .subtitle2
+                          ?.copyWith(color: CrColors.secondaryColor),
+                    ),
+                    SizedBox(
+                      height: 40.h,
+                    ),
+                    // ignore: sized_box_for_whitespace
+                    Container(
+                        width: 20.w,
+                        height: 20.h,
+                        child: CircularProgressIndicator.adaptive(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                              CrColors.secondaryColor),
+                        )),
+                  ],
                 ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Text(
-                  "World's largest Private Chat App",
-                  style: Theme.of(context)
-                      .textTheme
-                      .button
-                      ?.copyWith(color: CrColors.secondaryColor),
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                // ignore: sized_box_for_whitespace
-                Container(
-                    width: 20.w,
-                    height: 20.h,
-                    child: CircularProgressIndicator.adaptive(
-                      valueColor:
-                          AlwaysStoppedAnimation<Color>(CrColors.secondaryColor),
-                    )),
-              ],
-            ),
-          ));
+              ));
         });
   }
 }
