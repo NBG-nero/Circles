@@ -15,7 +15,7 @@ class AuthViewModel extends BaseModel {
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
   Future<bool> setisLoggedIn() async {
-    await intiPrefs();
+    await initPrefs();
     bool isLoggedIn = await googleSignIn.isSignedIn();
     if (isLoggedIn &&
         (prefs?.getString(FirestoreConstants.id)?.isNotEmpty == true)) {

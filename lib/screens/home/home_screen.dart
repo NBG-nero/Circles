@@ -28,14 +28,14 @@ class _HomescreenState extends State<Homescreen> {
         viewModelBuilder: () => HomeViewModel(),
         onModelReady: (h) {
           h.setInitialised(true);
-      // Future.delayed(const Duration(seconds: 5), (() {
+          // Future.delayed(const Duration(seconds: 5), (() {
           if (h.getUserFirebaseId().toString().isNotEmpty == true) {
             h.currentUserId = h.getUserFirebaseId().toString();
           } else {
             AutoRouter.of(context)
-                    .pushAndPopUntil(SignIn(), predicate: (route) => false);
+                .pushAndPopUntil(SignIn(), predicate: (route) => false);
           }
-            // }));
+          // }));
           h.listScrollController.addListener(h.scrollListener);
         },
         builder: (context, model, child) {
@@ -76,17 +76,22 @@ class _HomescreenState extends State<Homescreen> {
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10, right: 17),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text('Settings'),
-                            Icon(
-                              Icons.settings_outlined,
-                              size: 25.h,
-                            )
-                          ],
+                      GestureDetector(
+                        onTap: () {
+                          AutoRouter.of(context).push(const Settings());
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10, right: 17),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Settings'),
+                              Icon(
+                                Icons.settings_outlined,
+                                size: 25.h,
+                              )
+                            ],
+                          ),
                         ),
                       ),
                       GestureDetector(
@@ -96,7 +101,7 @@ class _HomescreenState extends State<Homescreen> {
                               predicate: (route) => false);
                         },
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 17, right: 17),
+                          padding: const EdgeInsets.only(top: 18, right: 17),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [

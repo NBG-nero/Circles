@@ -12,6 +12,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i2;
+import 'package:flutter/cupertino.dart' as _i4;
 import 'package:flutter/material.dart' as _i3;
 
 import '../screens/screens.dart' as _i1;
@@ -42,6 +43,12 @@ class AppRouter extends _i2.RootStackRouter {
         child: const _i1.Homescreen(),
       );
     },
+    Settings.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i1.Settings(),
+      );
+    },
   };
 
   @override
@@ -57,6 +64,10 @@ class AppRouter extends _i2.RootStackRouter {
         _i2.RouteConfig(
           Homescreen.name,
           path: '/Homescreen',
+        ),
+        _i2.RouteConfig(
+          Settings.name,
+          path: '/Settings',
         ),
       ];
 }
@@ -76,7 +87,7 @@ class Splashscreen extends _i2.PageRouteInfo<void> {
 /// generated route for
 /// [_i1.SignIn]
 class SignIn extends _i2.PageRouteInfo<SignInArgs> {
-  SignIn({_i3.Key? key})
+  SignIn({_i4.Key? key})
       : super(
           SignIn.name,
           path: '/sign-in',
@@ -89,7 +100,7 @@ class SignIn extends _i2.PageRouteInfo<SignInArgs> {
 class SignInArgs {
   const SignInArgs({this.key});
 
-  final _i3.Key? key;
+  final _i4.Key? key;
 
   @override
   String toString() {
@@ -107,4 +118,16 @@ class Homescreen extends _i2.PageRouteInfo<void> {
         );
 
   static const String name = 'Homescreen';
+}
+
+/// generated route for
+/// [_i1.Settings]
+class Settings extends _i2.PageRouteInfo<void> {
+  const Settings()
+      : super(
+          Settings.name,
+          path: '/Settings',
+        );
+
+  static const String name = 'Settings';
 }

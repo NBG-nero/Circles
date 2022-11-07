@@ -6,12 +6,12 @@ import '../utilities/constants/constants.dart';
 class BaseModel extends BaseViewModel {
   SharedPreferences? prefs;
 
-  intiPrefs() async {
+  initPrefs() async {
     prefs = await SharedPreferences.getInstance();
   }
 
  Future<String?> getUserFirebaseId() async {
-    await intiPrefs();
+    await initPrefs();
    return prefs?.getString(FirestoreConstants.id);
     
   }

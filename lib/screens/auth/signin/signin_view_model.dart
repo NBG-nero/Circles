@@ -23,7 +23,7 @@ class SignInViewModel extends AuthViewModel {
   Status get status => _status;
 
   Future<bool> handleSignIn() async {
-    await intiPrefs();
+    await initPrefs();
     _status = Status.authenticating;
     notifyListeners();
     GoogleSignInAccount? googleUser = await googleSignIn.signIn();

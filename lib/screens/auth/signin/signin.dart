@@ -51,7 +51,6 @@ class _SignInState extends State<SignIn> {
           //   default:
           //     break;
           // }
-
           return Scaffold(
             backgroundColor: CrColors.primaryColor,
        

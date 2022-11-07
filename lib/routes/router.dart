@@ -9,6 +9,8 @@ import '../screens/screens.dart';
     AutoRoute(page: SignIn),
 
     AutoRoute(page: Homescreen),
+    AutoRoute(page: Settings),
+
   ],
 )
 class $AppRouter {}
