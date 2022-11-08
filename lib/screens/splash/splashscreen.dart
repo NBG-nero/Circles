@@ -22,7 +22,9 @@ class _SplashscreenState extends State<Splashscreen> {
         onModelReady: (s) {
           s.setInitialised(true);
           Future.delayed(const Duration(seconds: 5), (() {
-            s.checkSignedIn();
+            // s.checkSignedIn();
+        //  loggedIn = s.loadLoggedfromPrefs();
+            
             s.loggedIn == true
                 ? AutoRouter.of(context).pushAndPopUntil(const Homescreen(),
                     predicate: (route) => false)
