@@ -16,8 +16,11 @@ class AuthViewModel extends BaseModel {
     loadLoggedfromPrefs();
   }
   final GoogleSignIn googleSignIn = GoogleSignIn();
+
   final String logged = "LoggedIn";
+
   bool loggedIn = false;
+  
   setLoggedIn(val) {
     loggedIn = val;
     saveLoggedtoprefs();
@@ -34,6 +37,7 @@ class AuthViewModel extends BaseModel {
     loggedIn = prefs?.getBool(logged) ?? false;
     notifyListeners();
   }
+
 
   Future<bool> setisLoggedIn() async {
     await initPrefs();

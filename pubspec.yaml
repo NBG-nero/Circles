@@ -53,6 +53,7 @@ dependencies:
   provider: 
   stacked: 
   google_fonts: ^3.0.1
+  get_it: ^7.2.0
   
   json_serializable: 
   json_annotation: 

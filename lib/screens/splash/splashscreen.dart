@@ -1,11 +1,18 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:circles/screens/splash/splash_view_model.dart';
 import 'package:circles/utilities/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../routes/router.gr.dart';
+import '../auth/auth_view_model.dart';
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -16,21 +23,41 @@ class Splashscreen extends StatefulWidget {
 
 class _SplashscreenState extends State<Splashscreen> {
   @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 5), () {
+      checkSignedIn();
+    });
+  }
+
+  void checkSignedIn() async {
+    AuthViewModel auth = AuthViewModel();
+    bool isLoggedIn = await auth.setisLoggedIn();
+    if (isLoggedIn) {
+      log(isLoggedIn.toString());
+      AutoRouter.of(context)
+          .pushAndPopUntil(const Homescreen(), predicate: (route) => false);
+    }
+    AutoRouter.of(context)
+        .pushAndPopUntil(SignIn(), predicate: (route) => false);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SplashViewModel>.reactive(
         viewModelBuilder: () => SplashViewModel(),
         onModelReady: (s) {
           s.setInitialised(true);
-          Future.delayed(const Duration(seconds: 5), (() {
-            // s.checkSignedIn();
-        //  loggedIn = s.loadLoggedfromPrefs();
-            
-            s.loggedIn == true
-                ? AutoRouter.of(context).pushAndPopUntil(const Homescreen(),
-                    predicate: (route) => false)
-                : AutoRouter.of(context)
-                    .pushAndPopUntil(SignIn(), predicate: (route) => false);
-          }));
+          // Future.delayed(const Duration(seconds: 5), (() {
+          //   // s.checkSignedIn();
+          //   //  loggedIn = s.loadLoggedfromPrefs();
+          // bool? loggedIn =  s.prefs?.getBool('logged');
+          //   loggedIn == true
+          //       ? AutoRouter.of(context).pushAndPopUntil(const Homescreen(),
+          //           predicate: (route) => false)
+          //       : AutoRouter.of(context)
+          //           .pushAndPopUntil(SignIn(), predicate: (route) => false);
+          // }));
         },
         builder: (context, model, child) {
           return Scaffold(
