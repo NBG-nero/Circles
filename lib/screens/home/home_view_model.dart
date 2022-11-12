@@ -22,6 +22,7 @@ class HomeViewModel extends AuthViewModel {
     await firebaseAuth.signOut();
     await googleSignIn.disconnect();
     await googleSignIn.signOut();
+    // setLoggedIn(false);
   }
 
   scrollListener() {

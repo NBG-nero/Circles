@@ -7,8 +7,7 @@ import 'package:circles/screens/splash/splash_view_model.dart';
 import 'package:circles/utilities/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:stacked/stacked.dart';
 
 import '../../routes/router.gr.dart';
@@ -25,9 +24,9 @@ class _SplashscreenState extends State<Splashscreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 5), (() {
       checkSignedIn();
-    });
+    }));
   }
 
   void checkSignedIn() async {
@@ -37,9 +36,12 @@ class _SplashscreenState extends State<Splashscreen> {
       log(isLoggedIn.toString());
       AutoRouter.of(context)
           .pushAndPopUntil(const Homescreen(), predicate: (route) => false);
+    } else {
+      log(isLoggedIn.toString());
+
+      AutoRouter.of(context)
+          .pushAndPopUntil(SignIn(), predicate: (route) => false);
     }
-    AutoRouter.of(context)
-        .pushAndPopUntil(SignIn(), predicate: (route) => false);
   }
 
   @override
@@ -49,14 +51,18 @@ class _SplashscreenState extends State<Splashscreen> {
         onModelReady: (s) {
           s.setInitialised(true);
           // Future.delayed(const Duration(seconds: 5), (() {
+          //   // s.loadLoggedfromPrefs();
           //   // s.checkSignedIn();
-          //   //  loggedIn = s.loadLoggedfromPrefs();
-          // bool? loggedIn =  s.prefs?.getBool('logged');
-          //   loggedIn == true
-          //       ? AutoRouter.of(context).pushAndPopUntil(const Homescreen(),
-          //           predicate: (route) => false)
-          //       : AutoRouter.of(context)
-          //           .pushAndPopUntil(SignIn(), predicate: (route) => false);
+
+          //   if (s.loggedIn == true) {
+          //     log('loggedIn = ${s.loggedIn}');
+          //     AutoRouter.of(context).pushAndPopUntil(const Homescreen(),
+          //         predicate: (route) => false);
+          //   } else {
+          //      log('loggedIn = ${s.loggedIn}');
+          //     AutoRouter.of(context)
+          //         .pushAndPopUntil(SignIn(), predicate: (route) => false);
+          //   }
           // }));
         },
         builder: (context, model, child) {

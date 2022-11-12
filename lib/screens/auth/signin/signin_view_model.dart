@@ -1,5 +1,3 @@
-
-
 import 'package:circles/utilities/utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -77,6 +75,8 @@ class SignInViewModel extends AuthViewModel {
         }
         _status = Status.authenticated;
         showToast("Sign in successful");
+        // setLoggedIn(true);
+
         notifyListeners();
         return true;
       } else {
@@ -95,10 +95,11 @@ class SignInViewModel extends AuthViewModel {
     }
   }
 
-  Future<void> handleSignOut() async {
-    _status = Status.uninitialized;
-    await firebaseAuth.signOut();
-    await googleSignIn.disconnect();
-    await googleSignIn.signOut();
-  }
+  // Future<void> handleSignOut() async {
+  //   _status = Status.uninitialized;
+  //   await firebaseAuth.signOut();
+  //   await googleSignIn.disconnect();
+  //   await googleSignIn.signOut();
+  //   setLoggedIn(false);
+  // }
 }

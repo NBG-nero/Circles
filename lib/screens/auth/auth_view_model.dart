@@ -12,15 +12,16 @@ enum Status {
 }
 
 class AuthViewModel extends BaseModel {
-  AuthViewModel() {
-    loadLoggedfromPrefs();
-  }
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
   final String logged = "LoggedIn";
 
   bool loggedIn = false;
-  
+
+  AuthViewModel() {
+    loadLoggedfromPrefs();
+  }
+
   setLoggedIn(val) {
     loggedIn = val;
     saveLoggedtoprefs();
@@ -38,15 +39,15 @@ class AuthViewModel extends BaseModel {
     notifyListeners();
   }
 
-
   Future<bool> setisLoggedIn() async {
     await initPrefs();
     bool isLoggedIn = await googleSignIn.isSignedIn();
     if (isLoggedIn &&
         (prefs?.getString(FirestoreConstants.id)?.isNotEmpty == true)) {
-          setLoggedIn(true);
+      // setLoggedIn(true);
       return true;
     } else {
+      // setLoggedIn(false);
       return false;
     }
   }
