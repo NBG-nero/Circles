@@ -14,11 +14,11 @@ class SettingsViewModel extends HomeViewModel {
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 
-  dynamic id = "";
-  dynamic nickname = "";
-  dynamic aboutMe = "";
-  dynamic photoUrl = "";
-  dynamic phoneNumber = "";
+  String id = "";
+  String nickname = "";
+  String aboutMe = "";
+  String photoUrl = "";
+  String phoneNumber = "";
 
   bool isloading = false;
   File? avatarImageFile;
@@ -27,7 +27,24 @@ class SettingsViewModel extends HomeViewModel {
   final FocusNode focusAboutMe = FocusNode();
 
   String dialoCodedigits = "+243";
-  final TextEditingController _controller = TextEditingController();
+  // TextEditingController? nickCtrl;
+  // TextEditingController? aboutMeCtrl;
+
+  final TextEditingController pController = TextEditingController();
+  setName(val) {
+    nickname = val;
+    notifyListeners();
+  }
+
+  setAboutMe(val) {
+    aboutMe = val;
+    notifyListeners();
+  }
+
+  setdialCodes(val) {
+    dialoCodedigits = val;
+    notifyListeners();
+  }
 
   Future<String?> getprefs(String key) async {
     await initPrefs();
@@ -54,11 +71,24 @@ class SettingsViewModel extends HomeViewModel {
   }
 
   void readLocal() {
-    id = getprefs(FirestoreConstants.id);
-    nickname = getprefs(FirestoreConstants.nickname);
-    aboutMe = getprefs(FirestoreConstants.aboutMe);
-    photoUrl = getprefs(FirestoreConstants.photoUrl);
-    phoneNumber = getprefs(FirestoreConstants.phoneNumber);
+    getprefs(FirestoreConstants.id).then((value) {
+      id = value!;
+    });
+    getprefs(FirestoreConstants.nickname).then((value) {
+      nickname = value!;
+    });
+    getprefs(FirestoreConstants.aboutMe).then((value) {
+      aboutMe = value!;
+    });
+    getprefs(FirestoreConstants.photoUrl).then((value) {
+      photoUrl = value!;
+    });
+    getprefs(FirestoreConstants.phoneNumber).then((value) {
+      phoneNumber = value!;
+    });
+    // nickCtrl = TextEditingController(text: nickname);
+    // aboutMeCtrl = TextEditingController(text: aboutMe);
+
     notifyListeners();
   }
 
@@ -78,6 +108,9 @@ class SettingsViewModel extends HomeViewModel {
       isloading = true;
       notifyListeners();
       uploadFile();
+    } else {
+      isloading = false;
+      notifyListeners();
     }
   }
 
@@ -117,8 +150,8 @@ class SettingsViewModel extends HomeViewModel {
     focusNickname.unfocus();
     focusAboutMe.unfocus();
     isloading = true;
-    if (dialoCodedigits != "00" && _controller.text != "") {
-      phoneNumber = dialoCodedigits + _controller.text.toString();
+    if (dialoCodedigits != "00" && pController.text != "") {
+      phoneNumber = dialoCodedigits + pController.text.toString();
     }
     notifyListeners();
     UserChat updateInfo = UserChat(

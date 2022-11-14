@@ -54,6 +54,7 @@ dependencies:
   stacked: 
   google_fonts: ^3.0.1
   get_it: ^7.2.0
+  country_code_picker: ^2.0.2
   
   json_serializable: 
   json_annotation: 
