@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 // import 'package:circles/screens/base_model.dart';
@@ -27,8 +28,8 @@ class SettingsViewModel extends HomeViewModel {
   final FocusNode focusAboutMe = FocusNode();
 
   String dialoCodedigits = "+243";
-  // TextEditingController? nickCtrl;
-  // TextEditingController? aboutMeCtrl;
+  TextEditingController? nickCtrl;
+  TextEditingController? aboutMeCtrl;
 
   final TextEditingController pController = TextEditingController();
   setName(val) {
@@ -70,25 +71,45 @@ class SettingsViewModel extends HomeViewModel {
         .update(dataNeedUpdate);
   }
 
-  void readLocal() {
-    getprefs(FirestoreConstants.id).then((value) {
-      id = value!;
-    });
-    getprefs(FirestoreConstants.nickname).then((value) {
-      nickname = value!;
-    });
-    getprefs(FirestoreConstants.aboutMe).then((value) {
-      aboutMe = value!;
-    });
+  void readLocal() async {
+    await initPrefs();
+    id = prefs?.getString(FirestoreConstants.id) ?? "";
+    nickname = prefs?.getString(FirestoreConstants.nickname) ?? "";
+    aboutMe = prefs?.getString(FirestoreConstants.aboutMe) ?? "";
+    // getprefs(FirestoreConstants.id).then((value) {
+    //   id = value!;
+    // });
+    // notifyListeners();
+
+    // getprefs(FirestoreConstants.nickname).then((value) {
+    //   nickname = value!;
+    // });
+    // notifyListeners();
+
+    // getprefs(FirestoreConstants.aboutMe).then((value) {
+    //   aboutMe = value!;
+    // });
+    // notifyListeners();
+
     getprefs(FirestoreConstants.photoUrl).then((value) {
       photoUrl = value!;
     });
+    notifyListeners();
+
     getprefs(FirestoreConstants.phoneNumber).then((value) {
       phoneNumber = value!;
     });
-    // nickCtrl = TextEditingController(text: nickname);
-    // aboutMeCtrl = TextEditingController(text: aboutMe);
+    notifyListeners();
 
+    nickCtrl = TextEditingController(text: nickname);
+    log(nickname);
+    notifyListeners();
+
+    aboutMeCtrl = TextEditingController(text: aboutMe);
+    log(aboutMe);
+    notifyListeners();
+
+    log(photoUrl);
     notifyListeners();
   }
 

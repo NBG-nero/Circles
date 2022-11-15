@@ -10,7 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../models/models.dart';
+// import '../../models/models.dart';
 import '../../providers/theme_notifier.dart';
 import '../../utilities/constants/constants.dart';
 import 'settings_view_model.dart';
@@ -23,8 +23,7 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-  TextEditingController nickCtrl = TextEditingController();
-  TextEditingController aboutMeCtrl = TextEditingController();
+  // TextEditingController nickCtrl = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeNotifier>(context);
@@ -36,13 +35,12 @@ class _SettingsState extends State<Settings> {
           s.setInitialised(true);
           s.readLocal();
 
-          nickCtrl.text = s.nickname;
-          aboutMeCtrl.text = s.aboutMe;
+          // nickCtrl.text = s.nickname;
+          // aboutMeCtrl.text = s.aboutMe;
           // log(s.toString());d
-          log(".........${s.nickname}");
-          log(s.aboutMe);
-          log(nickCtrl.text);
-     
+          // log(".........${s.nickname}");
+          // log(s.aboutMe);
+          // log(s.nickCtrl!.text);
         },
         builder: (context, model, child) {
           return Scaffold(
@@ -77,7 +75,7 @@ class _SettingsState extends State<Settings> {
                                         model.photoUrl.toString(),
                                         fit: BoxFit.cover,
                                         width: 90.w,
-                                        height: 90.h,
+                                        height: 110.h,
                                         errorBuilder:
                                             (context, error, stackTrace) {
                                           return Icon(
@@ -121,7 +119,7 @@ class _SettingsState extends State<Settings> {
                                   borderRadius: BorderRadius.circular(45),
                                   child: Image.file(model.avatarImageFile!,
                                       width: 90.w,
-                                      height: 90.h,
+                                      height: 110.h,
                                       fit: BoxFit.cover),
                                 ),
                         ),
@@ -142,6 +140,7 @@ class _SettingsState extends State<Settings> {
                               data: Theme.of(context).copyWith(
                                   primaryColor: CrColors.secondaryColor),
                               child: TextFormField(
+                                
                                 style: textTheme.subtitle1
                                     ?.copyWith(color: Colors.grey),
                                 decoration: InputDecoration(
@@ -153,15 +152,17 @@ class _SettingsState extends State<Settings> {
                                       borderSide: BorderSide(
                                           color: CrColors.secondaryColor),
                                     ),
-                                    hintText: "Write your name",
+                                    hintText: 
+                                    // model.nickname,
+                                    "write your name",
                                     hintStyle: textTheme.headline6?.copyWith(),
                                     contentPadding: const EdgeInsets.all(5)),
-                                controller: nickCtrl,
-                                // onChanged: (value) {
-                                //   model.nickname = value;
+                                controller: model.nickCtrl,
+                                onChanged: (value) {
+                                  model.nickname = value;
 
-                                //   // model.setName(value);
-                                // },
+                                  // model.setName(value);
+                                },
                                 focusNode: model.focusNickname,
                               ),
                             ),
@@ -191,14 +192,15 @@ class _SettingsState extends State<Settings> {
                                           color: CrColors.secondaryColor),
                                     ),
                                     hintText:
-                                        "Write something about yourself..",
+                                    // model.aboutMe,
+                                    "Write something about yourself..",
                                     hintStyle: textTheme.headline6?.copyWith(),
                                     contentPadding: const EdgeInsets.all(5)),
-                                controller: aboutMeCtrl,
-                                // onChanged: (value) {
-                                //   model.aboutMe = value;
-                                //   // model.setAboutMe(value);
-                                // },
+                                controller: model.aboutMeCtrl,
+                                onChanged: (value) {
+                                  model.aboutMe = value;
+                                  // model.setAboutMe(value);
+                                },
                                 focusNode: model.focusAboutMe,
                               ),
                             ),
