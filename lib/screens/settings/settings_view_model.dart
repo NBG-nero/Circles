@@ -76,20 +76,7 @@ class SettingsViewModel extends HomeViewModel {
     id = prefs?.getString(FirestoreConstants.id) ?? "";
     nickname = prefs?.getString(FirestoreConstants.nickname) ?? "";
     aboutMe = prefs?.getString(FirestoreConstants.aboutMe) ?? "";
-    // getprefs(FirestoreConstants.id).then((value) {
-    //   id = value!;
-    // });
-    // notifyListeners();
-
-    // getprefs(FirestoreConstants.nickname).then((value) {
-    //   nickname = value!;
-    // });
-    // notifyListeners();
-
-    // getprefs(FirestoreConstants.aboutMe).then((value) {
-    //   aboutMe = value!;
-    // });
-    // notifyListeners();
+   
 
     getprefs(FirestoreConstants.photoUrl).then((value) {
       photoUrl = value!;
