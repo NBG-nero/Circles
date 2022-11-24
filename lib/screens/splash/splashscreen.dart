@@ -21,28 +21,28 @@ class Splashscreen extends StatefulWidget {
 }
 
 class _SplashscreenState extends State<Splashscreen> {
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(const Duration(seconds: 5), (() {
-      checkSignedIn();
-    }));
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   Future.delayed(const Duration(seconds: 5), (() {
+  //     checkSignedIn();
+  //   }));
+  // }
 
-  void checkSignedIn() async {
-    AuthViewModel auth = AuthViewModel();
-    bool isLoggedIn = await auth.setisLoggedIn();
-    if (isLoggedIn) {
-      log(isLoggedIn.toString());
-      AutoRouter.of(context)
-          .pushAndPopUntil(const Homescreen(), predicate: (route) => false);
-    } else {
-      log(isLoggedIn.toString());
+  // void checkSignedIn() async {
+  //   AuthViewModel auth = AuthViewModel();
+  //   bool isLoggedIn = await auth.setisLoggedIn();
+  //   if (isLoggedIn) {
+  //     log(isLoggedIn.toString());
+  //     AutoRouter.of(context)
+  //         .pushAndPopUntil(const Homescreen(), predicate: (route) => false);
+  //   } else {
+  //     log(isLoggedIn.toString());
 
-      AutoRouter.of(context)
-          .pushAndPopUntil(SignIn(), predicate: (route) => false);
-    }
-  }
+  //     AutoRouter.of(context)
+  //         .pushAndPopUntil(SignIn(), predicate: (route) => false);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +50,10 @@ class _SplashscreenState extends State<Splashscreen> {
         viewModelBuilder: () => SplashViewModel(),
         onModelReady: (s) {
           s.setInitialised(true);
+
+          Future.delayed(const Duration(seconds: 5), (() {
+            s.checkSignedIn();
+          }));
           // Future.delayed(const Duration(seconds: 5), (() {
           //   // s.loadLoggedfromPrefs();
           //   // s.checkSignedIn();
