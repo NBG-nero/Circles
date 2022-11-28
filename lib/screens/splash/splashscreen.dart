@@ -54,20 +54,7 @@ class _SplashscreenState extends State<Splashscreen> {
           Future.delayed(const Duration(seconds: 5), (() {
             s.checkSignedIn();
           }));
-          // Future.delayed(const Duration(seconds: 5), (() {
-          //   // s.loadLoggedfromPrefs();
-          //   // s.checkSignedIn();
-
-          //   if (s.loggedIn == true) {
-          //     log('loggedIn = ${s.loggedIn}');
-          //     AutoRouter.of(context).pushAndPopUntil(const Homescreen(),
-          //         predicate: (route) => false);
-          //   } else {
-          //      log('loggedIn = ${s.loggedIn}');
-          //     AutoRouter.of(context)
-          //         .pushAndPopUntil(SignIn(), predicate: (route) => false);
-          //   }
-          // }));
+        
         },
         builder: (context, model, child) {
           return Scaffold(
